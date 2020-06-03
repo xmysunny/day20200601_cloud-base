@@ -1,0 +1,12 @@
+server:
+  port: 4042  #客户端端口号
+
+eureka:
+  client:
+    region: wuhan #设置分区区域
+    prefer-same-zone-eureka: true #优先选择同机房的eureka服务
+    availability-zones:
+      wuahn: zone1,zone2  #当同机房的服务不能使用时，就会在这个列表中按顺序选择
+  instance:
+    metadata-map:
+      zone: wuhan-zone2 #设置当前分区的机房

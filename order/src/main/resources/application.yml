@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: order #客户端名称
+  datasource:
+    url: jdbc:mysql://localhost:3306/springcloud?userUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+eureka:
+  client:
+    register-with-eureka: true  #开启注册功能
+    service-url:
+      defaultZone: http://localhost:8761/eureka #声明注册地址
+pagehelper:
+  reasonable: true  #分页参数合理化
+  support-methods-arguments: true
+  params: count=countsql
+
+feign:
+  hystrix:
+    enabled: true #开启服务降级

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: message
+  redis:
+    port: 6381
+    host: 192.172.5.37
+    password: 123456
+    database: 1
+server:
+  port: 6060
