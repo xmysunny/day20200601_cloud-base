@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.wn.common.entity.MyParam;
 import com.wn.common.entity.MyRes;
 import com.wn.common.entity.Order;
-import com.wn.common.entity.TextEmailEntity;
 import com.wn.order.feign.MessageFeign;
 import com.wn.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +26,30 @@ public class OrderController {
 
     @Autowired
     MessageFeign messageFeign;
-    @Value("${server.port}")
-    private int post;
-    @Value("${spring.application.name}")
-    private  String name;
-    @Value("${eureka.client.region}")
-    private String region;
-    @Value("${eureka.instance.metadata-map.zone}")
-    private String zone;
 
+    @Value("${server.port}")
+    private int post;//端口
+
+    @Value("${spring.application.name}")
+    private  String name;//名字
+
+    @Value("${eureka.client.region}")
+    private String region;//分区
+
+    @Value("${eureka.instance.metadata-map.zone}")
+    private String zone;//机房
+
+    /**
+     * 订单服务
+     * @return
+     */
     @GetMapping("hello")
     public MyRes visitOrder(){
 
-        MyRes mess = messageFeign.serdTextMail(new TextEmailEntity("2239599266@qq.com", "服务降级通知"));
-        return mess;
+        //MyRes mess = messageFeign.serdTextMail(new TextEmailEntity("2239599266@qq.com", "服务降级通知"));
+        //return mess;
+        String message="我是"+name+"服务,"+post+"端口,"+region+"分区"+zone+"机房";
+        return MyRes.success(message);
     }
 
     @RequestMapping("getOrder")

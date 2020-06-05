@@ -9,4 +9,4 @@ eureka:
       wuahn: zone1,zone2  #当同机房的服务不能使用时，就会在这个列表中按顺序选择
   instance:
     metadata-map:
-      zone: wuhan-zone2 #设置当前分区的机房
+      zone: wuhan-zone1 #设置当前分区的机房

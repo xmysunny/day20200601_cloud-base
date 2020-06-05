@@ -41,8 +41,19 @@ public class MessageController {
      */
     @PostMapping("sendPhoneMsg")
     public MyRes sendPhoneMsg(@RequestBody MyParam<PhoneMsg> myParam){
-        System.out.println("messagetest");
         MyRes myRes = messageService.sendPhoneMsg(myParam);
+        return myRes;
+    }
+
+    /**
+     * 手机短信验证码登录
+     * @param myParam
+     * @return
+     */
+    @PostMapping("loginWithPhone")
+    public MyRes loginWithPhone(@RequestBody MyParam<PhoneMsg> myParam){
+        MyRes myRes = messageService.loginWithPhone(myParam);
+
 
         return myRes;
     }

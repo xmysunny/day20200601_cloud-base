@@ -6,7 +6,28 @@ eureka:
 spring:
   application:
     name: user  #声明客户端名称
+  sleuth: #设置链路追踪
+    enabled: true
+    sampler:
+      rate: 1000
+      probability: 1.0
+  zipkin:
+    enabled: true
+    sender:
+      type: rabbit
+    rabbitmq:
+      addresses: 182.254.164.41
+  rabbitmq:
+    password: guest
+    username: guest
+    port: 5672
+    addresses: 182.254.164.41
 
 feign:
   hystrix:
     enabled: false #开启服务降级功能
+
+order:  #配置负载均衡，调用哪个服务。就写哪个服务名称
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+

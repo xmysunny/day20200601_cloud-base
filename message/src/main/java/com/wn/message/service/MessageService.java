@@ -66,4 +66,36 @@ public class MessageService {
             return MyRes.fail().code(50000).msg("验证码获取失败");
         }
     }
+
+
+
+    /**
+     * 手机短信验证码登录
+     * @param myParam
+     * @return
+     */
+    public MyRes loginWithPhone(MyParam<PhoneMsg> myParam){
+        //取出用户输入的手机号和验证码
+        String phoneNum = myParam.getT().getPhoneNum();
+        String phoneCode = myParam.getT().getPhoneCode();
+
+        //取出redis中的以手机号为键的验证码对比
+        ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
+        String redisCode = opsForValue.get(phoneNum);
+        System.out.println("redisCode="+redisCode);
+        if (redisCode.equals(phoneCode)){
+            deleteCode(myParam.getT().getPhoneNum());
+            return MyRes.success("登录成功");
+        }else {
+            return MyRes.fail().msg("登录失败").code(50000);
+        }
+    }
+
+    /**
+     * 登录成功删除验证码
+     * @param key
+     */
+    public void deleteCode(String key){
+        redisTemplate.delete(key);
+    }
 }

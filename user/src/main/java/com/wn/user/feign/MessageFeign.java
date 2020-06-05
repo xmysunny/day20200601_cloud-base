@@ -17,4 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface MessageFeign {
     @RequestMapping("sendPhoneMsg")
     public MyRes sendPhoneMsg(MyParam<PhoneMsg> myParam);
+
+    @RequestMapping("loginWithPhone")
+    public MyRes loginWithPhone(MyParam<PhoneMsg> myParam);
 }
